@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ item.name }}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .card { margin-top: 20px; }
+        .card-body { padding: 20px; }
+        .list-group-item { display: flex; justify-content: space-between; }
+        .badge-custom { background-color: #007bff; color: white; }
+        .btn-bid { background-color: #28a745; color: white; }
+        .btn-back { background-color: #6c757d; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 拍賣品資訊 -->
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">{{ item.name }}</h1>
+                <hr>
+                <p class="card-text">{{ item.description }}</p>
+                <p><strong>底價:</strong> <span class="badge badge-custom">{{ item.base_price }}</span></p>
+                <p><strong>目前最高價:</strong> <span class="badge badge-custom">{{ item.highest_bid or '還未啟標' }}</span></p>
+            </div>
+        </div>
+
+        <!-- 出價表單 -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2>出價</h2>
+                <form action="/item/{{ item.item_id }}" method="POST">
+                    <div class="form-group">
+                        <label for="bid_amount">金額</label>
+                        <input type="number" class="form-control" name="bid_amount" step="0.01" required>
+                    </div>
+                    <button type="submit" class="btn btn-bid btn-block">競標！</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 競標記錄 -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2>競標記錄</h2>
+                <ul class="list-group">
+                    {% for bid in bids %}
+                    <li class="list-group-item">
+                        <span><strong>參與者:</strong> {{ bid.username }}</span>
+                        <span><strong>出價:</strong> {{ bid.bid_amount }} <strong>時間:</strong> {{ bid.timestamp }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>        
+
+        <!-- 返回按鈕 -->
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-back">返回</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

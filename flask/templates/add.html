@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增拍賣品</title>
+    <!-- 引入 Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4 mb-4">新增競拍項目</h1>
+        <form action="/add" method="POST"> 
+            <div class="form-group">
+                <label for="name">競拍項目名稱</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">說明</label>
+                <textarea class="form-control" name="description" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="base_price">底價</label>
+                <input type="number" class="form-control" name="base_price" step="0.01" required>
+            </div>
+            <button type="submit" class="btn btn-success">新增</button>
+            <a href="/" class="btn btn-secondary">返回</a>
+        </form>
+    </div>
+
+    <!-- 引入 Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
